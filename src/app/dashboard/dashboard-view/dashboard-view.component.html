@@ -1,0 +1,139 @@
+<section class="content-header"></section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">List years with multiple winners</h3>
+                </div>
+                
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Year</th>
+                                <th>Win Count</th>
+                            </tr>
+                            <tr *ngFor="let item of topYearsAwards; let idx = index">
+                                <td>{{ item?.year }}</td>
+                                <td>{{ item?.winnerCount || 0 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Top 3 studios with winners</h3>
+                </div>
+                
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Win Count</th>
+                            </tr>
+                            <tr *ngFor="let item of topStudios; let idx = index">
+                                <td>{{ item?.studio_name }}</td>
+                                <td>{{ item?.winCount || 0 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Producers with longest and shortest interval between wins</h3>
+                </div>
+                
+                <div class="box-body no-padding">
+                    <strong class="pad">Maximum</strong>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Producer</th>
+                                <th>Interval</th>
+                                <th>Previous year</th>
+                                <th>Following year</th>
+                            </tr>
+                            <tr *ngFor="let item of producerAwardsInterval?.max; let idx = index">
+                                <td>{{ item?.producer }}</td>
+                                <td>{{ item?.interval || 0 }}</td>
+                                <td>{{ item?.previousWin }}</td>
+                                <td>{{ item?.followingWin || 0 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box-body no-padding">
+                    <strong class="pad">Minimum</strong>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Producer</th>
+                                <th>Interval</th>
+                                <th>Previous year</th>
+                                <th>Following year</th>
+                            </tr>
+                            <tr *ngFor="let item of producerAwardsInterval?.min; let idx = index">
+                                <td>{{ item?.producer }}</td>
+                                <td>{{ item?.interval || 0 }}</td>
+                                <td>{{ item?.previousWin }}</td>
+                                <td>{{ item?.followingWin || 0 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">List movie winners by year</h3>
+                </div>
+                
+                <div class="box-body no-padding">
+                    <div class="box-tools pad">
+                        <div class="input-group input-group-sm hidden-xs">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <th>Year</th>
+                                <th>Title</th>
+                            </tr>
+                            <tr *ngFor="let item of topStudios; let idx = index">
+                                <td>{{ item?.studio_name }}</td>
+                                <td>{{ item?.winCount || 0 }}</td>
+                                <td>{{ item?.winCount || 0 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
