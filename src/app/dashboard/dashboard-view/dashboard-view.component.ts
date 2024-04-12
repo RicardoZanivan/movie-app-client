@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MoviesService } from 'src/app/movies/movies.service';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -17,8 +18,10 @@ export class DashboardViewComponent implements OnInit {
   topYearsAwards: any[] = [];
   topStudios: any[] = [];
   producerAwardsInterval: any[] = [];
+  page: number = 1;
 
   constructor(private dashboardService: DashboardService,
+              private moviesService: MoviesService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -65,13 +68,26 @@ export class DashboardViewComponent implements OnInit {
     this.doGetMovies(filters);
   }
 
+  doLoadNextPage() {
+    this.page++
+    const filters = {...this.moviesFiltersForm.value, page: this.page};
+
+    this.doGetMovies(filters);
+  }
+
   private doGetMovies(filters?: any) {
-    this.dashboardService.onGetMovies(filters).subscribe(res => {
-      console.log('=== res movies ===', res)
-      this.movies = res
+    this.moviesService.onGetMovies(filters).subscribe(res => {
+      this.doSetList(res, this.page);
     }, resError => {
       console.log('=== error movies ===', resError)
     })
+  }
+
+  doSetList(items: any[], page: number) {
+    if (items) {
+      if (!page || page <= 1) this.movies = items;
+      else this.movies = this.movies.concat(items);
+    }
   }
 
   doLoadTopYearAwards() {
@@ -80,7 +96,6 @@ export class DashboardViewComponent implements OnInit {
 
   private doGetTopYearAwards() {
     this.dashboardService.onGetTopYearsAwards().subscribe(res => {
-      console.log('=== res movies ===', res)
       this.topYearsAwards = res
     }, resError => {
       console.log('=== error movies ===', resError)
@@ -93,7 +108,6 @@ export class DashboardViewComponent implements OnInit {
 
   private doGetTopStudios() {
     this.dashboardService.onGetTopStudios().subscribe(res => {
-      console.log('=== res movies ===', res)
       this.topStudios = res
     }, resError => {
       console.log('=== error movies ===', resError)
@@ -106,7 +120,6 @@ export class DashboardViewComponent implements OnInit {
 
   private doGetAwardInterval() {
     this.dashboardService.onGetAwardInterval().subscribe(res => {
-      console.log('=== res movies ===', res)
       this.producerAwardsInterval = res
     }, resError => {
       console.log('=== error movies ===', resError)

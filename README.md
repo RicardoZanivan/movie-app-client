@@ -45,7 +45,7 @@ docker-compose up
 ```
 2. **Funcionalidades:**
 ```markdown
-- Dashboardo com informações principais sobre permiassoes anuais, studios e produtores.
+- Dashboard com informações principais sobre permiassoes anuais, studios e produtores.
 - Lista dos filmes.
 ```
 

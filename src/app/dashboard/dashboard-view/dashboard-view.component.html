@@ -119,22 +119,29 @@
                         </form>
                     </div>
 
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <th>Year</th>
-                                <th>Title</th>
-                            </tr>
-                            <tr *ngFor="let item of movies; let idx = index">
-                                <td>{{ item?.id }}</td>
-                                <td>{{ item?.year || 'N/D' }}</td>
-                                <td>{{ item?.title || 'N/D' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="direct-chat-messages" style="height: 250;">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Year</th>
+                                    <th>Title</th>
+                                </tr>
+                                <tr *ngFor="let item of movies; let idx = index">
+                                    <td>{{ item?.id }}</td>
+                                    <td>{{ item?.year || 'N/D' }}</td>
+                                    <td>{{ item?.title || 'N/D' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-                
+                <div class="box-footer text-center">
+                    <a (click)="doLoadNextPage()" href="javascript:void(0)">
+                        View All Products
+                    </a>
+                </div>
             </div>
         </div>
     </div>

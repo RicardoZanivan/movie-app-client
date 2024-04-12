@@ -15,6 +15,13 @@ export class MoviesViewComponent implements OnInit {
   winnerChange: FormControl;
 
   movies: any[] = [];
+  page: number = 1;
+
+  winnerOptions = [
+    {param: '', name: 'Yes/No'},
+    {param: true, name: 'Yes'},
+    {param: false, name: 'No'}
+  ]
 
   constructor(private moviesService: MoviesService,
               private fb: FormBuilder) { }
@@ -28,7 +35,7 @@ export class MoviesViewComponent implements OnInit {
 
   doCreateMoviesFiltersForm() {
     this.yearTextChange = this.fb.control('');
-    this.winnerChange = this.fb.control(null);
+    this.winnerChange = this.fb.control('');
 
     this.moviesFiltersForm = new FormGroup({
       year: this.yearTextChange,
@@ -67,23 +74,30 @@ export class MoviesViewComponent implements OnInit {
 
 
   doLoadMovies(filters?: any) {
+    this.page = 1;
+
+    this.doGetMovies(filters);
+  }
+
+  doLoadNextPage() {
+    this.page++
+    const filters = {...this.moviesFiltersForm.value, page: this.page};
+
     this.doGetMovies(filters);
   }
 
   private doGetMovies(filters?: any) {
     this.moviesService.onGetMovies(filters).subscribe(res => {
-      console.log('=== res movies ===', res)
-      this.movies = res
+      this.doSetList(res, this.page);
     }, resError => {
       console.log('=== error movies ===', resError)
     })
   }
 
-  winnerOptions(): any[] {
-    return [
-      {param: null, name: 'Yes/No'},
-      {param: true, name: 'Yes'},
-      {param: false, name: 'No'}
-    ]
-  }
+  doSetList(items: any[], page: number) {
+    if (items) {
+      if (!page || page <= 1) this.movies = items;
+      else this.movies = this.movies.concat(items);
+    }
+  }  
 }

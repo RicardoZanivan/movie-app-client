@@ -16,6 +16,7 @@ export class MoviesService {
     if (params) {
       if (params.year) filters = `year=${params.year}`;
       if (params.winner != undefined) filters += (filters) ? `&winner=${params.winner}` : `winner=${params.winner}`;
+      if (params.page) filters += (filters) ? `&page=${params.page}` : `page=${params.page}`;
 
       if (filters) filters = `?${filters}`;
     }

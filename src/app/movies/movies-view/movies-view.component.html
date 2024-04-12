@@ -3,58 +3,72 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-          <div class="box">
+            <div class="box direct-chat direct-chat-warning">
                 <div class="box-header">
                     <h3 class="box-title">List movies</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
-            
-                <div class="box-body">
-                    <form [formGroup]="moviesFiltersForm" novalidate>
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="align-content: center;">
-                                        Id
-                                    </th>
-                                    <th>
-                                        <p>Year</p>
-                                        <div class="input-group input-group-sm hidden-xs">
-                                            <input type="text" name="table_search" class="form-control pull-right" formControlName="year" placeholder="Search by year">
-                                            <div class="input-group-btn">
-                                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                
+                <div class="box-body">                
+                    <div class="direct-chat-messages" style="height: 460px;">
+                        <form [formGroup]="moviesFiltersForm" novalidate>
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="align-content: center;">
+                                            Id
+                                        </th>
+                                        <th>
+                                            <p>Year</p>
+                                            <div class="input-group input-group-sm hidden-xs">
+                                                <input type="text" name="table_search" class="form-control pull-right" formControlName="year" placeholder="Search by year">
+                                                <div class="input-group-btn">
+                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
-                                    <th style="align-content: center;">
-                                        Title
-                                    </th>
-                                    <th>
-                                        <p>Winner?</p>
-                                        <div class="input-group input-group-sm hidden-xs" style="width: 100%;">
-                                            <select class="form-control" formControlName="winner">
-                                                <option *ngFor="let item of winnerOptions()" [value]="item?.param">{{ item?.name }}</option>
-                                            </select>
-                                        </div>    
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngIf="(!movies?.length)">
-                                    <td colspan="4" style="text-align: center; padding: 2rem;">
-                                        <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No movies in the list!</span>
-                                    </td>
-                                </tr>
-
-                                <tr *ngFor="let item of movies; let idx = index">
-                                    <td>{{ item?.id }}</td>
-                                    <td>{{ item?.year }}</td>
-                                    <td>{{ item?.title }}</td>
-                                    <td [class.text-muted]="(!item?.winner)">{{ item?.winner || 'No' }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                                        </th>
+                                        <th style="align-content: center;">
+                                            Title
+                                        </th>
+                                        <th>
+                                            <p>Winner?</p>
+                                            <div class="input-group input-group-sm hidden-xs" style="width: 100%;">
+                                                <select class="form-control" formControlName="winner">
+                                                    <option *ngFor="let item of winnerOptions" [value]="item?.param">{{ item?.name }}</option>
+                                                </select>
+                                            </div>    
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="(!movies?.length)">
+                                        <td colspan="4" style="text-align: center; padding: 2rem;">
+                                            <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No movies in the list!</span>
+                                        </td>
+                                    </tr>
+    
+                                    <tr *ngFor="let item of movies; let idx = index">
+                                        <td>{{ item?.id }}</td>
+                                        <td>{{ item?.year }}</td>
+                                        <td>{{ item?.title }}</td>
+                                        <td [class.text-muted]="(!item?.winner)">{{ (item?.winner) ? 'Yes' : 'No' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    
+                    </div>                
                 </div>
+                
+                <div class="box-footer text-center">
+                    <a (click)="doLoadNextPage()" href="javascript:void(0)">
+                        View All Products
+                    </a>
+                </div>                
             </div>
         </div>
     </div>
