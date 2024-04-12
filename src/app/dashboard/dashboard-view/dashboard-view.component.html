@@ -109,12 +109,14 @@
                 
                 <div class="box-body no-padding">
                     <div class="box-tools pad">
-                        <div class="input-group input-group-sm hidden-xs">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-                        <div class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                        </div>
+                        <form [formGroup]="moviesFiltersForm" novalidate>
+                            <div class="input-group input-group-sm hidden-xs">
+                                <input type="text" name="table_search" class="form-control pull-right" formControlName="yearSearchText" placeholder="Search by year">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <table class="table table-striped">
@@ -124,10 +126,10 @@
                                 <th>Year</th>
                                 <th>Title</th>
                             </tr>
-                            <tr *ngFor="let item of topStudios; let idx = index">
-                                <td>{{ item?.studio_name }}</td>
-                                <td>{{ item?.winCount || 0 }}</td>
-                                <td>{{ item?.winCount || 0 }}</td>
+                            <tr *ngFor="let item of movies; let idx = index">
+                                <td>{{ item?.id }}</td>
+                                <td>{{ item?.year || 'N/D' }}</td>
+                                <td>{{ item?.title || 'N/D' }}</td>
                             </tr>
                         </tbody>
                     </table>

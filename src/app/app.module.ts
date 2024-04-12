@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +21,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HttpClientModule
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

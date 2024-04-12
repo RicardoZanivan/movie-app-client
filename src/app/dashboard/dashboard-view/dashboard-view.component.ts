@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -8,26 +10,63 @@ import { DashboardService } from '../dashboard.service';
 })
 export class DashboardViewComponent implements OnInit {
 
+  moviesFiltersForm: FormGroup;
+  yearTextChange: FormControl;
+
   movies: any[] = [];
   topYearsAwards: any[] = [];
   topStudios: any[] = [];
   producerAwardsInterval: any[] = [];
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.doCreateMoviesFiltersForm();
     this.doLoadMovies();
     this.doLoadTopYearAwards();
     this.doLoadTopStudios();
     this.doLoadAwardInterval();
   }
 
-  doLoadMovies() {
-    this.doGetMovies();
+  //#region === FUNCOES DO FORMULARIOS DE FILTROS ===
+
+  doCreateMoviesFiltersForm() {
+    this.yearTextChange = this.fb.control('');
+
+    this.moviesFiltersForm = new FormGroup({
+      yearSearchText: this.yearTextChange,
+      // winner: new FormControl(true)
+    })
+
+    this.doActiveFiltersChange();
   }
 
-  private doGetMovies() {
-    this.dashboardService.onGetMovies().subscribe(res => {
+  doClearMoviesFilters() {
+    if (this.moviesFiltersForm) {
+      this.moviesFiltersForm.reset();
+      this.doCreateMoviesFiltersForm();
+    }
+  }
+
+  doActiveFiltersChange() {
+    this.yearTextChange.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+      ).subscribe(res => {
+        this.doLoadMovies(this.moviesFiltersForm.value);
+      });
+    }
+
+  //#endregion
+
+  doLoadMovies(filters?: any) {
+    this.doGetMovies(filters);
+  }
+
+  private doGetMovies(filters?: any) {
+    this.dashboardService.onGetMovies(filters).subscribe(res => {
       console.log('=== res movies ===', res)
       this.movies = res
     }, resError => {
