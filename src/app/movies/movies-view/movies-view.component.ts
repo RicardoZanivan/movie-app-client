@@ -16,6 +16,7 @@ export class MoviesViewComponent implements OnInit {
 
   movies: any[] = [];
   page: number = 1;
+  loadMovies: boolean = false;
 
   winnerOptions = [
     {param: '', name: 'Yes/No'},
@@ -87,10 +88,15 @@ export class MoviesViewComponent implements OnInit {
   }
 
   private doGetMovies(filters?: any) {
+    this.doSetLoadMovies(true);
+
     this.moviesService.onGetMovies(filters).subscribe(res => {
       this.doSetList(res, this.page);
     }, resError => {
       console.log('=== error movies ===', resError)
+      this.doSetLoadMovies(false);
+    }, () => {
+      this.doSetLoadMovies(false);
     })
   }
 
@@ -99,5 +105,9 @@ export class MoviesViewComponent implements OnInit {
       if (!page || page <= 1) this.movies = items;
       else this.movies = this.movies.concat(items);
     }
-  }  
+  }
+
+  doSetLoadMovies(active: boolean) {
+    this.loadMovies = active;
+  }
 }

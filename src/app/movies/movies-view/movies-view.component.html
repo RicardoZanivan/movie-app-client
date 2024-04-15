@@ -68,7 +68,11 @@
                     <a (click)="doLoadNextPage()" href="javascript:void(0)">
                         View All Products
                     </a>
-                </div>                
+                </div>
+
+                <div class="overlay" *ngIf="loadMovies">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
             </div>
         </div>
     </div>

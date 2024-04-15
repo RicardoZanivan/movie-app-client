@@ -20,6 +20,11 @@ export class DashboardViewComponent implements OnInit {
   producerAwardsInterval: any[] = [];
   page: number = 1;
 
+  loadTopYears: boolean = false;
+  loadTopStudios: boolean = false;
+  loadIntervals: boolean = false;
+  loadWinners: boolean = false;
+
   constructor(private dashboardService: DashboardService,
               private moviesService: MoviesService,
               private fb: FormBuilder) { }
@@ -76,10 +81,15 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetMovies(filters?: any) {
+    this.doSetLoadWinners(true);
+
     this.moviesService.onGetMovies(filters).subscribe(res => {
       this.doSetList(res, this.page);
     }, resError => {
       console.log('=== error movies ===', resError)
+      this.doSetLoadWinners(false);
+    }, () => {
+      this.doSetLoadWinners(false);
     })
   }
 
@@ -95,10 +105,15 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetTopYearAwards() {
+    this.doSetLoadTopYears(true);
+
     this.moviesService.onGetTopYearsAwards().subscribe(res => {
       this.topYearsAwards = res
     }, resError => {
       console.log('=== error movies ===', resError)
+      this.doSetLoadTopYears(false);
+    }, () => {
+      this.doSetLoadTopYears(false);
     })
   }
 
@@ -107,10 +122,15 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetTopStudios() {
+    this.doSetLoadTopStudios(true);
+
     this.moviesService.onGetTopStudiosAwards().subscribe(res => {
       this.topStudios = res
     }, resError => {
       console.log('=== error movies ===', resError)
+      this.doSetLoadTopStudios(false);
+    }, () => {
+      this.doSetLoadTopStudios(false);
     })
   }
 
@@ -119,11 +139,31 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetAwardInterval() {
+    this.doSetLoadIntervals(true)
+
     this.dashboardService.onGetAwardInterval().subscribe(res => {
       this.producerAwardsInterval = res
     }, resError => {
       console.log('=== error movies ===', resError)
+      this.doSetLoadIntervals(false)
+    }, () => {
+      this.doSetLoadIntervals(false)
     })
   }
 
+  private doSetLoadTopYears(active: boolean) {
+    this.loadTopYears = active
+  }
+
+  private doSetLoadTopStudios(active: boolean) {
+    this.loadTopStudios = active
+  }
+
+  private doSetLoadIntervals(active: boolean) {
+    this.loadIntervals = active
+  }
+
+  private doSetLoadWinners(active: boolean) {
+    this.loadWinners = active
+  }
 }

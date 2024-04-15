@@ -22,7 +22,10 @@
                         </tbody>
                     </table>
                 </div>
-                
+
+                <div class="overlay" *ngIf="loadTopYears">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>                
             </div>
         </div>
     
@@ -47,6 +50,9 @@
                     </table>
                 </div>
                 
+                <div class="overlay" *ngIf="loadTopStudios">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -59,17 +65,17 @@
                 </div>
                 
                 <div class="box-body no-padding">
-                    <strong class="pad">Maximum</strong>
+                    <p><strong class="pad">Maximum</strong></p>
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th>Producer</th>
+                                <th style="min-width: 13rem;">Producer</th>
                                 <th>Interval</th>
                                 <th>Previous year</th>
                                 <th>Following year</th>
                             </tr>
                             <tr *ngFor="let item of producerAwardsInterval?.max; let idx = index">
-                                <td>{{ item?.producer }}</td>
+                                <td style="min-width: 13rem;">{{ item?.producer }}</td>
                                 <td>{{ item?.interval || 0 }}</td>
                                 <td>{{ item?.previousWin }}</td>
                                 <td>{{ item?.followingWin || 0 }}</td>
@@ -79,17 +85,17 @@
                 </div>
 
                 <div class="box-body no-padding">
-                    <strong class="pad">Minimum</strong>
+                    <p><strong class="pad">Minimum</strong></p>
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th>Producer</th>
+                                <th style="min-width: 13rem;">Producer</th>
                                 <th>Interval</th>
                                 <th>Previous year</th>
                                 <th>Following year</th>
                             </tr>
                             <tr *ngFor="let item of producerAwardsInterval?.min; let idx = index">
-                                <td>{{ item?.producer }}</td>
+                                <td style="min-width: 13rem;">{{ item?.producer }}</td>
                                 <td>{{ item?.interval || 0 }}</td>
                                 <td>{{ item?.previousWin }}</td>
                                 <td>{{ item?.followingWin || 0 }}</td>
@@ -98,6 +104,9 @@
                     </table>
                 </div>
                 
+                <div class="overlay" *ngIf="loadIntervals">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
             </div>
         </div>
     
@@ -137,10 +146,15 @@
                     </div>
 
                 </div>
+
                 <div class="box-footer text-center">
                     <a (click)="doLoadNextPage()" href="javascript:void(0)">
                         View All Products
                     </a>
+                </div>
+
+                <div class="overlay" *ngIf="loadWinners">
+                    <i class="fa fa-refresh fa-spin"></i>
                 </div>
             </div>
         </div>
