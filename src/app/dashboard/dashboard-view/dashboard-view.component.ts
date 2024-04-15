@@ -95,7 +95,7 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetTopYearAwards() {
-    this.dashboardService.onGetTopYearsAwards().subscribe(res => {
+    this.moviesService.onGetTopYearsAwards().subscribe(res => {
       this.topYearsAwards = res
     }, resError => {
       console.log('=== error movies ===', resError)
@@ -107,7 +107,7 @@ export class DashboardViewComponent implements OnInit {
   }
 
   private doGetTopStudios() {
-    this.dashboardService.onGetTopStudios().subscribe(res => {
+    this.moviesService.onGetTopStudiosAwards().subscribe(res => {
       this.topStudios = res
     }, resError => {
       console.log('=== error movies ===', resError)

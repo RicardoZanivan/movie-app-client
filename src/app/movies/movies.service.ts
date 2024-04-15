@@ -29,4 +29,12 @@ export class MoviesService {
 
     return this.http.get<any[]>(`${environment.apiHost}/api/movies${query}`);
   }
+
+  onGetTopStudiosAwards(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiHost}/api/movies/topstudios`);
+  }
+
+  onGetTopYearsAwards(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiHost}/api/movies/topyears`);
+  }
 }

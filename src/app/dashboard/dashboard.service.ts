@@ -29,21 +29,7 @@ export class DashboardService {
     return this.http.get<any[]>(`${environment.apiHost}/api/movies${query}`);
   }
 
-  onGetTopYearsAwards(filters?: any): Observable<any[]> {
-    const query = '';
-
-    return this.http.get<any[]>(`${environment.apiHost}/api/topyearsawards${query}`);
-  }
-
-  onGetTopStudios(filters?: any): Observable<any[]> {
-    const query = '';
-
-    return this.http.get<any[]>(`${environment.apiHost}/api/topstudios${query}`);
-  }
-
-  onGetAwardInterval(filters?: any): Observable<any[]> {
-    const query = '';
-
-    return this.http.get<any[]>(`${environment.apiHost}/api/productors/awardsInterval${query}`);
+  onGetAwardInterval(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiHost}/api/productors/awardsInterval`);
   }
 }
