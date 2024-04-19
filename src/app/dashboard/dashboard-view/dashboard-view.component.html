@@ -9,11 +9,16 @@
                 </div>
                 
                 <div class="box-body no-padding">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th>Year</th>
                                 <th>Win Count</th>
+                            </tr>
+                            <tr *ngIf="(!topYearsAwards?.length)">
+                                <td colspan="2" style="text-align: center; padding: 2rem;">
+                                    <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No winners in the list!</span>
+                                </td>
                             </tr>
                             <tr *ngFor="let item of topYearsAwards; let idx = index">
                                 <td>{{ item?.year }}</td>
@@ -36,11 +41,16 @@
                 </div>
                 
                 <div class="box-body no-padding">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th>Name</th>
                                 <th>Win Count</th>
+                            </tr>
+                            <tr *ngIf="(!topStudios?.length)">
+                                <td colspan="2" style="text-align: center; padding: 2rem;">
+                                    <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No winners in the list!</span>
+                                </td>
                             </tr>
                             <tr *ngFor="let item of topStudios; let idx = index">
                                 <td>{{ item?.studio_name }}</td>
@@ -66,13 +76,18 @@
                 
                 <div class="box-body no-padding">
                     <p><strong class="pad">Maximum</strong></p>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th style="min-width: 13rem;">Producer</th>
                                 <th>Interval</th>
                                 <th>Previous year</th>
                                 <th>Following year</th>
+                            </tr>
+                            <tr *ngIf="(!producerAwardsInterval?.max?.length)">
+                                <td colspan="4" style="text-align: center; padding: 2rem;">
+                                    <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No producer in the list!</span>
+                                </td>
                             </tr>
                             <tr *ngFor="let item of producerAwardsInterval?.max; let idx = index">
                                 <td style="min-width: 13rem;">{{ item?.producer }}</td>
@@ -86,13 +101,18 @@
 
                 <div class="box-body no-padding">
                     <p><strong class="pad">Minimum</strong></p>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-hover">
                         <tbody>
                             <tr>
                                 <th style="min-width: 13rem;">Producer</th>
                                 <th>Interval</th>
                                 <th>Previous year</th>
                                 <th>Following year</th>
+                            </tr>
+                            <tr *ngIf="(!producerAwardsInterval?.min?.length)">
+                                <td colspan="4" style="text-align: center; padding: 2rem;">
+                                    <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No producer in the list!</span>
+                                </td>
                             </tr>
                             <tr *ngFor="let item of producerAwardsInterval?.min; let idx = index">
                                 <td style="min-width: 13rem;">{{ item?.producer }}</td>
@@ -129,12 +149,17 @@
                     </div>
 
                     <div class="direct-chat-messages" style="height: 250;">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-hover">
                             <tbody>
                                 <tr>
                                     <th>Id</th>
                                     <th>Year</th>
                                     <th>Title</th>
+                                </tr>
+                                <tr *ngIf="(!movies?.length)">
+                                    <td colspan="3" style="text-align: center; padding: 2rem;">
+                                        <span><i class="icon fa fa-info" style="margin-right: .5rem;"></i>No awards in the list!</span>
+                                    </td>
                                 </tr>
                                 <tr *ngFor="let item of movies; let idx = index">
                                     <td>{{ item?.id }}</td>
