@@ -31,7 +31,7 @@ export class DashboardViewComponent implements OnInit {
 
   ngOnInit() {
     this.doCreateMoviesFiltersForm();
-    this.doLoadMovies();
+    this.doLoadMovies(this.moviesFiltersForm.value);
     this.doLoadTopYearAwards();
     this.doLoadTopStudios();
     this.doLoadAwardInterval();
@@ -43,8 +43,8 @@ export class DashboardViewComponent implements OnInit {
     this.yearTextChange = this.fb.control('');
 
     this.moviesFiltersForm = new FormGroup({
-      yearSearchText: this.yearTextChange,
-      // winner: new FormControl(true)
+      year: this.yearTextChange,
+      winner: new FormControl(true)
     })
 
     this.doActiveFiltersChange();
